@@ -4,6 +4,8 @@
     --title-color: #2E2F42;
     --text-color: #434455;
     --link-color: #4D5AE5;
+    --dur-plas-ttf: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
 }
 
 /* --------------Reset --------------------*/
@@ -135,10 +137,14 @@ body {
     text-transform: uppercase;
     color: var(--link-color);
     margin-right: 76px;
+    transition: color var(--dur-plas-ttf);
+
+
 }
 
 .header-logo .part-logo {
     color: var(--title-color);
+
 }
 
 .header-logo:hover,
@@ -156,7 +162,9 @@ body {
 
 }
 
-.header-item {}
+.header-item {
+    position: relative;
+}
 
 .header-link {
     display: block;
@@ -166,12 +174,29 @@ body {
     color: #2E2F42;
     padding-top: 24px;
     padding-bottom: 24px;
+    transition: color var(--dur-plas-ttf);
+
+
 }
 
 .header-link:hover,
 .header-link:focus {
     color: #404bbf;
 }
+
+.header-underline::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: #404BBF;
+    border-radius: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+
 
 .contacts {
     font-style: normal;
@@ -191,11 +216,13 @@ body {
     font-size: 16px;
     line-height: 1.5;
     color: #434455;
+    transition: color var(--dur-plas-ttf);
 }
 
 .contacts-link:hover,
 .contacts-link:focus {
-    color: #404bbf
+    color: #404bbf;
+
 }
 
 /* -----------------HEROr------------------- */
@@ -242,6 +269,7 @@ body {
     background-color: #4D5AE5;
     color: #FFFFFF;
     cursor: pointer;
+    transition: background-color var(--dur-plas-ttf);
 }
 
 .hero-btn:hover,
@@ -383,6 +411,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color var(--dur-plas-ttf);
 
 }
 
@@ -442,6 +471,7 @@ body {
     justify-content: center;
     align-items: center;
     color: #8e8f99;
+    transition: color var(--dur-plas-ttf), border-color var(--dur-plas-ttf);
 }
 
 .customers-link:hover,
@@ -516,6 +546,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color var(--dur-plas-ttf);
 }
 
 .footer-soc-link:hover,
@@ -523,6 +554,58 @@ body {
     background-color: #31D0AA;
 }
 
+/* ------****************Modal Window***************** */
+.backdrop {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 47, 66, 0.4);
+    transition: opacity var(--dur-plas-ttf), visibility var(--dur-plas-ttf);
+}
+
+.backdrop.is-hidden .modal {
+
+    transform: translate(-50%, -50%) scale(0);
+
+}
+
+.modal {
+    width: 408px;
+    min-height: 576px;
+
+    background-color: #FCFCFC;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform var(--dur-plas-ttf);
+    padding: 24px;
+
+}
+
+.modal-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+
+    background-color: #E7E9FC;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+}
+
+.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
 
 /* ------****************PAGE PORTFOLIO***************** */
 
@@ -548,6 +631,9 @@ body {
 
 .btn-text {
     padding: 12px 24px;
+    transition: background-color var(--dur-plas-ttf),
+        color var(--dur-plas-ttf),
+        box-shadow var(--dur-plas-ttf);
 }
 
 .btn-text:hover,
@@ -567,15 +653,20 @@ body {
     flex-wrap: wrap;
     gap: 48px 24px;
     /* padding-bottom: 120px; */
+
 }
+
+.portfolio-item {}
 
 .portfolio-list li {
     width: calc((100% - 48px)/3);
     border: 1px solid #E7E9FC;
+
 }
 
 .portfolio-link {
     display: block;
+    transition: box-shadow var(--dur-plas-ttf);
 }
 
 .portfolio-link:hover,
@@ -583,6 +674,35 @@ body {
     box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
 }
 
+.portfolio-link:hover .portfolio-cover-text,
+.portfolio-link:focus .portfolio-cover-text {
+    transform: translateY(0%);
+}
+
+
+.portfolio-cover {
+    position: relative;
+    overflow: hidden;
+}
+
+
+.portfolio-cover-text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: #F4F4FD;
+    background-color: #4D5AE5;
+
+    padding: 40px 32px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    transform: translateY(100%);
+    transition: transform var(--dur-plas-ttf);
+
+
+}
 
 .portfolio-subtitle {
     margin-bottom: 8px;
